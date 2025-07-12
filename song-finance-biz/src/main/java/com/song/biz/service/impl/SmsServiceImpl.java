@@ -19,10 +19,11 @@ import java.util.Map;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+
 public class SmsServiceImpl implements SmsService {
 
-    final SmsCommonService smsCommonService;
-    final SysConfigService sysConfigService;
+    SmsCommonService smsCommonService;
+    SysConfigService sysConfigService;
 
     /**
      * 发送短信验证码
