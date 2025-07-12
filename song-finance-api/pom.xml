@@ -42,7 +42,7 @@
     </dependencies>
 
     <build>
-        <finalName>bage-finance-api</finalName>
+        <finalName>song-finance-api</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

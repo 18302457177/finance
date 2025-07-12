@@ -70,19 +70,36 @@ mybatis:
     default-statement-timeout: 15
 
 # Swagger
-swagger:
-  enable: true
-  name: SONG-FINANCE-API
-  description: SONG-FINANCE-API 接口文档
-  version: 0.0.1
+#swagger:
+#  enable: true
+#  name: SONG-FINANCE-API
+#  description: SONG-FINANCE-API 接口文档
+#  version: 0.0.1
 
 # Swagger UI
+#knife4j:
+#  enable: true
+#  production: false
+#  setting:
+#    language: zh-CN
+#    enableDynamicParameter: true
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.song.controller
+# knife4j的增强配置，不需要增强可以不配
 knife4j:
   enable: true
-  production: false
   setting:
-    language: zh-CN
-    enableDynamicParameter: true
+    language: zh_cn
 minio:
   # 访问资源的 URL
   base-url: "http://192.168.226.138:9200/"
@@ -108,7 +125,7 @@ redisson:
   address: redis://192.168.226.138:6379
 security:
   # 开启安全校验
-  enable: true
+  enable: false
   getUserType: token
   # 白名单
   ignores:
@@ -124,6 +141,7 @@ security:
     - /login/*
     - /reg/*
     - /wxEvent/receiveMpEvent
+
   expire: 36000
 sys:
   #是否开启redisTemplate配置(默认关闭)
