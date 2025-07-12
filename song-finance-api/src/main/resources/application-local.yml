@@ -1,0 +1,14 @@
+# 数据源配置
+spring:
+  #  profiles:
+  #    active: local
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://192.168.226.138:3306/song-finance?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+# 日志配置
+logging:
+  file:
+    name: ../${spring.application.name}/logs/bage-finance-api.log
