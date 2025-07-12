@@ -31,7 +31,24 @@ spring:
       # 检查时会先把连接从池中拿出来（空闲的话），然后调用isValid()或执行connectionTestQuery来校验活性，如果通过校验，则放回池里。
       # 默认 0 （不启用），最小值为 30000 ms，必须小于 maxLifetime。支持 JMX 动态修改
       keepalive-time: 30000
-
+  data:
+    # redis配置
+    redis:
+      database: 0
+      port: 6379
+      lettuce:
+        pool:
+          #连接池中最大空闲连接数为 30。这意味着连接池可以保持最多 30 个空闲的 Redis 连接，以便在需要时重用。
+          max-idle: 30
+          #连接池中最小空闲连接数为 10。这表示连接池至少会保持 10 个空闲连接，以便在需要时快速获取可用连接。
+          min-idle: 10
+          #连接池中的最大活动连接数为 30。这是指连接池在同一时间可以支持的最大活动（使用中）连接数量。
+          max-active: 30
+          #当连接池已用尽且达到最大活动连接数时，从连接池获取连接的最大等待时间为 10,000 毫秒（10 秒）。如果在等待时间内没有可用连接，将抛出连接超时异常。
+          max-wait: 10000
+        # 应用程序关闭时Lettuce 将等待最多 3 秒钟来完成关闭操作。如果超过这个时间仍未完成，则会强制关闭连接。
+        shutdown-timeout: 3000
+      host: 192.168.226.138
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -55,8 +72,8 @@ mybatis:
 # Swagger
 swagger:
   enable: true
-  name: BAGE-FINANCE-ADMIN-API
-  description: BAGE-FINANCE-ADMIN-API 接口文档
+  name: SONG-FINANCE-API
+  description: SONG-FINANCE-API 接口文档
   version: 0.0.1
 
 # Swagger UI
@@ -66,11 +83,29 @@ knife4j:
   setting:
     language: zh-CN
     enableDynamicParameter: true
-
+minio:
+  # 访问资源的 URL
+  base-url: "http://192.168.226.138:9200/"
+  # API 端点
+  endpoint: "http://192.168.226.138:9200/"
+  # 上传的 Bucket
+  bucket: finance
+  # Access Key
+#  access-key: minio
+  # Secret Key
+#  secret-key: cb709155c24a420a95f7bde91c3ed3a7
+  # 生成的临时访问地址过期时间（单位：分钟）
+  expire-time: 5
 # 日志配置
 logging:
   config: classpath:logback-spring-${spring.profiles.active}.xml
-
+rocketmq:
+  name-server: 192.168.226.138:9876
+  producer:
+    # 生产者组
+    group: producer-group-1
+redisson:
+  address: redis://192.168.226.138:6379
 security:
   # 开启安全校验
   enable: true
