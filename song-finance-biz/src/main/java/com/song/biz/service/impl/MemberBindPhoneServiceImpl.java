@@ -61,6 +61,8 @@ public class MemberBindPhoneServiceImpl implements MemberBindPhoneService {
         return memberBindPhoneMapper.insert(memberBindPhone) > 0;
     }
 
+
+
     /**
      * 修改密码
      *

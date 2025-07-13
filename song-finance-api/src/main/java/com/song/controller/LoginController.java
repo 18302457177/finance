@@ -42,8 +42,8 @@ public class LoginController {
      * @return
      */
     @Operation(summary = "获取图形验证码")
-    @GetMapping(value = "/getBase64Code")
-    public ApiResponse<String> getBase64Code(@Validated @ModelAttribute GetBase64CodeForm form) {
+    @PostMapping(value = "/getBase64Code")
+    public ApiResponse<String> getBase64Code(@RequestBody GetBase64CodeForm form) {
         String code = memberLoginService.getBase64Code(form);
         return ApiResponse.success(code);
     }
