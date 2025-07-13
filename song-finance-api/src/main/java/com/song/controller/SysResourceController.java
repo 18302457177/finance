@@ -9,6 +9,8 @@ import com.song.biz.dto.vo.GetSysResourceVo;
 import com.song.biz.dto.vo.ListSysResourceVo;
 import com.song.biz.service.SysResourceService;
 import com.song.common.dto.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Validated
+@Tag(name = "系统资源")
 public class SysResourceController {
     final SysResourceService sysResourceService;
 
@@ -35,6 +38,7 @@ public class SysResourceController {
      * @param form
      * @return
      */
+    @Operation(summary = "创建资源")
     @PostMapping(value = "/create")
     public ApiResponse<Boolean> create(@Valid @RequestBody CreateSysResourceForm form) {
         return ApiResponse.success(sysResourceService.create(form));
@@ -46,6 +50,7 @@ public class SysResourceController {
      * @param form
      * @return
      */
+    @Operation(summary = "修改资源")
     @PostMapping(value = "/update")
     public ApiResponse<Boolean> update(@Valid @RequestBody UpdateSysResourceForm form) {
         return ApiResponse.success(sysResourceService.update(form));
@@ -57,6 +62,7 @@ public class SysResourceController {
      * @param form
      * @return
      */
+    @Operation(summary = "查看资源列表")
     @PostMapping(value = "/list")
     public ApiResponse<List<ListSysResourceVo>> list(@Valid @RequestBody ListSysResourceForm form) {
         return ApiResponse.success(sysResourceService.list(form));
@@ -68,6 +74,7 @@ public class SysResourceController {
      * @param form
      * @return
      */
+    @Operation(summary = "删除资源")
     @PostMapping(value = "/del")
     public ApiResponse<Boolean> del(@Valid @RequestBody DelSysResourceForm form) {
         return ApiResponse.success(sysResourceService.del(form));
@@ -79,6 +86,7 @@ public class SysResourceController {
      * @param id
      * @return
      */
+    @Operation(summary = "查询资源明细")
     @GetMapping(value = "get")
     public ApiResponse<GetSysResourceVo> get(@Valid @NotNull @RequestParam Integer id) {
         return ApiResponse.success(sysResourceService.get(id));

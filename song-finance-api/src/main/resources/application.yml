@@ -13,7 +13,7 @@ server:
 spring:
   # 应用名称
   application:
-    name: bage-finance-api
+    name: song-finance-api
   # 数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -48,7 +48,7 @@ spring:
           max-wait: 10000
         # 应用程序关闭时Lettuce 将等待最多 3 秒钟来完成关闭操作。如果超过这个时间仍未完成，则会强制关闭连接。
         shutdown-timeout: 3000
-      host: 192.168.226.138
+      host: 39.96.178.50
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -102,9 +102,9 @@ knife4j:
     language: zh_cn
 minio:
   # 访问资源的 URL
-  base-url: "http://192.168.226.138:9200/"
+  base-url: "http://39.96.178.50:9200/"
   # API 端点
-  endpoint: "http://192.168.226.138:9200/"
+  endpoint: "http://39.96.178.50:9200/"
   # 上传的 Bucket
   bucket: finance
   # Access Key
@@ -117,12 +117,12 @@ minio:
 logging:
   config: classpath:logback-spring-${spring.profiles.active}.xml
 rocketmq:
-  name-server: 192.168.226.138:9876
+  name-server: 39.96.178.50:9876
   producer:
     # 生产者组
     group: producer-group-1
 redisson:
-  address: redis://192.168.226.138:6379
+  address: redis://39.96.178.50:6379
 security:
   # 开启安全校验
   enable: false

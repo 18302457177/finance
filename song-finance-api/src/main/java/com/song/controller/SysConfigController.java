@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.song.biz.dto.form.SaveSendSmsCodeTemplateConfigForm;
 import com.song.biz.service.SysConfigService;
 import com.song.common.dto.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 @Validated
+@Tag(name = "系统配置")
 public class SysConfigController {
     final SysConfigService sysConfigService;
 
@@ -31,6 +34,7 @@ public class SysConfigController {
      * @return
      * @throws JsonProcessingException
      */
+    @Operation(summary = "保存短信验证码模板配置")
     @PostMapping(value = "/saveSendSmsCodeTemplateConfig")
     public ApiResponse<Boolean> saveSendSmsCodeTemplateConfig(@Valid @RequestBody SaveSendSmsCodeTemplateConfigForm form) throws JsonProcessingException {
         return ApiResponse.success(sysConfigService.saveSendSmsCodeTemplateConfig(form));

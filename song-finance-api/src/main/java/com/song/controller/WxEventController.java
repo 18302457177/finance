@@ -4,6 +4,8 @@ package com.song.controller;
 import com.song.wx.aes.AesException;
 import com.song.wx.dto.MpCommonRequest;
 import com.song.wx.service.WxMpEventService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ import java.io.IOException;
 @RequestMapping(value = "/wxEvent")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "微信模块")
 public class WxEventController {
     final WxMpEventService wxMpEventService;
 
@@ -36,6 +39,7 @@ public class WxEventController {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
+    @Operation(summary = "接收微信事件推送")
     @RequestMapping(value = "/receiveMpEvent",
             method = {RequestMethod.GET, RequestMethod.POST})
     public String receiveMpEvent(@Validated @ModelAttribute MpCommonRequest mpCommonRequest, HttpServletRequest httpServletRequest) throws IOException, AesException {

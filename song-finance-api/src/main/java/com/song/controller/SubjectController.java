@@ -9,6 +9,8 @@ import com.song.biz.dto.vo.ListSubjectByCateAndCodeAndNameVo;
 import com.song.biz.dto.vo.ListSubjectVo;
 import com.song.biz.service.SubjectService;
 import com.song.common.dto.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Validated
+@Tag(name = "科目管理")
 public class SubjectController {
     final SubjectService subjectService;
 
@@ -39,6 +42,7 @@ public class SubjectController {
      * @return
      * @throws JsonProcessingException
      */
+    @Operation(summary = "创建科目")
     @PostMapping(value = "/create")
     public ApiResponse<Boolean> create(@Valid @RequestBody CreateSubjectForm form) throws JsonProcessingException {
         return ApiResponse.success(subjectService.create(form));
@@ -51,6 +55,7 @@ public class SubjectController {
      * @return
      * @throws JsonProcessingException
      */
+    @Operation(summary = "创建科目")
     @PostMapping(value = "/del")
     public ApiResponse<Boolean> del(@Valid @RequestBody DelForm form) throws JsonProcessingException {
         return ApiResponse.success(subjectService.del(form));
@@ -63,6 +68,7 @@ public class SubjectController {
      * @return
      * @throws JsonProcessingException
      */
+    @Operation(summary = "修改科目")
     @PostMapping(value = "/update")
     public ApiResponse<Boolean> update(@Valid @RequestBody UpdateSubjectForm form) throws JsonProcessingException {
         return ApiResponse.success(subjectService.update(form));
@@ -74,6 +80,7 @@ public class SubjectController {
      * @param form
      * @return
      */
+    @Operation(summary = "查询科目列表")
     @PostMapping(value = "/list")
     public ApiResponse<List<ListSubjectVo>> list(@Valid @RequestBody ListSubjectForm form) {
         return ApiResponse.success(subjectService.list(form));
@@ -85,6 +92,7 @@ public class SubjectController {
      * @param form
      * @return
      */
+    @Operation(summary = "查询科目列表(根据类别编码和名称查询)")
     @PostMapping(value = "/listByCateAndCodeAndName")
     public ApiResponse<List<ListSubjectByCateAndCodeAndNameVo>> listByCateAndCodeAndName(@Valid @RequestBody ListSubjectByCateAndCodeAndNameForm form) {
         return ApiResponse.success(subjectService.list(form));
@@ -97,6 +105,7 @@ public class SubjectController {
      * @return
      * @throws JsonProcessingException
      */
+    @Operation(summary = "获取科目详情")
     @GetMapping(value = "/get")
     public ApiResponse<GetSubjectVo> get(@RequestParam("id")
                                          @NotNull
@@ -112,6 +121,7 @@ public class SubjectController {
      * @return
      * @throws JsonProcessingException
      */
+    @Operation(summary = "获取科目详情（凭证选择会计科目使用）")
     @GetMapping(value = "/getDetail")
     public ApiResponse<GetSubjectDetailVo> getDetail(@RequestParam("id")
                                                      @NotNull
@@ -127,6 +137,7 @@ public class SubjectController {
      * @return
      * @throws JsonProcessingException
      */
+    @Operation(summary = "获取父科目详情")
     @GetMapping(value = "/getByPid")
     public ApiResponse<GetSubjectVo> getByPid(@RequestParam("pid")
                                               @NotNull
@@ -141,6 +152,7 @@ public class SubjectController {
      * @param form
      * @return
      */
+    @Operation(summary = "禁用或启用科目")
     @PostMapping(value = "/disable")
     public ApiResponse<Boolean> disable(@Valid @RequestBody DisableSubjectForm form) {
         return ApiResponse.success(subjectService.disable(form));
@@ -152,6 +164,7 @@ public class SubjectController {
      * @param response
      * @throws IOException
      */
+    @Operation(summary = "导出")
     @GetMapping(value = "/download")
     public void download(HttpServletResponse response) throws IOException {
         subjectService.download(response);

@@ -8,6 +8,8 @@ import com.song.biz.dto.vo.GetCurrencyConfigVo;
 import com.song.biz.dto.vo.ListCurrencyConfigVo;
 import com.song.biz.service.CurrencyConfigService;
 import com.song.common.dto.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ import java.util.List;
 @RequestMapping(value = "/currencyConfig")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "币别设置")
 public class CurrencyConfigController {
     final CurrencyConfigService currencyConfigService;
 
@@ -34,6 +37,7 @@ public class CurrencyConfigController {
      * @param form
      * @return
      */
+    @Operation(summary = "添加币别")
     @PostMapping(value = "/create")
     public ApiResponse<Boolean> create(@Valid @RequestBody CreateCurrencyConfigForm form) {
         return ApiResponse.success(currencyConfigService.create(form));
@@ -45,6 +49,7 @@ public class CurrencyConfigController {
      * @param form
      * @return
      */
+    @Operation(summary = "删除币别")
     @PostMapping(value = "/del")
     public ApiResponse<Boolean> del(@Valid @RequestBody DelCurrencyConfigForm form) {
         return ApiResponse.success(currencyConfigService.del(form));
@@ -56,6 +61,7 @@ public class CurrencyConfigController {
      * @param form
      * @return
      */
+    @Operation(summary = "修改币别")
     @PostMapping(value = "/update")
     public ApiResponse<Boolean> update(@Valid @RequestBody UpdateCurrencyConfigForm form) {
         return ApiResponse.success(currencyConfigService.update(form));
@@ -67,6 +73,7 @@ public class CurrencyConfigController {
      * @param id
      * @return
      */
+    @Operation(summary = "获取币别详情")
     @GetMapping(value = "/get")
     public ApiResponse<GetCurrencyConfigVo> getById(
             @Validated
@@ -82,6 +89,7 @@ public class CurrencyConfigController {
      *
      * @return
      */
+    @Operation(summary = "查询币别列表")
     @GetMapping(value = "/list")
     public ApiResponse<List<ListCurrencyConfigVo>> list() {
         return ApiResponse.success(currencyConfigService.list());

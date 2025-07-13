@@ -7,6 +7,8 @@ import com.song.biz.service.FileRefMappingService;
 import com.song.biz.service.FileService;
 import com.song.common.dto.ApiResponse;
 import com.song.mybatis.help.PageInfo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import java.util.Set;
 @RequestMapping(value = "/file")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "文件管理")
 public class FileController {
     final FileService fileService;
     final FileRefMappingService fileRefMappingService;
@@ -34,6 +37,7 @@ public class FileController {
      * @return
      * @throws Exception
      */
+    @Operation(summary = "上传文件（大于5M分片，小于等于5M不分片）")
     @PostMapping(value = "/uploadPart")
     public ApiResponse<String> uploadPart(@Valid UploadFileForm form) throws Exception {
         return ApiResponse.success(fileService.uploadPart(form));
@@ -46,6 +50,7 @@ public class FileController {
      * @return
      * @throws Exception
      */
+    @Operation(summary = "合并上传的文件（合并分片）")
     @PostMapping(value = "/composeFile")
     public ApiResponse<String> composeFile(@Valid @RequestBody ComposeFileForm form) throws Exception {
         return ApiResponse.success(fileService.composeFile(form));
@@ -58,6 +63,7 @@ public class FileController {
      * @return
      * @throws Exception
      */
+    @Operation(summary = "查询文件列表")
     @PostMapping(value = "/list")
     public ApiResponse<PageInfo<ListFileVo>> list(@Valid @RequestBody ListFileForm form) throws Exception {
         return ApiResponse.success(fileService.list(form));
@@ -70,6 +76,7 @@ public class FileController {
      * @return
      * @throws Exception
      */
+    @Operation(summary = "查询文件列表")
     @PostMapping(value = "/listByIds")
     public ApiResponse<List<ListFileVo>> listByIds(@Valid @RequestBody ListFileByIdsForm form) throws Exception {
         return ApiResponse.success(fileService.listByIds(form));
@@ -82,6 +89,7 @@ public class FileController {
      * @return
      * @throws Exception
      */
+    @Operation(summary = "获取图片地址")
     @GetMapping(value = "/getPicUrl")
     public ApiResponse<String> getPicUrl(@Valid @NotNull Long id) throws Exception {
         return ApiResponse.success(fileService.getPicUrl(id));
@@ -93,6 +101,7 @@ public class FileController {
      * @param form
      * @return
      */
+    @Operation(summary = "删除图片")
     @PostMapping(value = "/del")
     public ApiResponse<Boolean> del(@Valid @RequestBody DelForm form) {
         return ApiResponse.success(fileService.del(form));
@@ -104,6 +113,7 @@ public class FileController {
      * @param form
      * @return
      */
+    @Operation(summary = "获取文件id列表")
     @PostMapping(value = "/listFileIds")
     public ApiResponse<Set<Long>> listFileIds(@Valid @RequestBody ListFileRefMappingFileIdsForm form) {
         return ApiResponse.success(fileRefMappingService.listFileIds(form));

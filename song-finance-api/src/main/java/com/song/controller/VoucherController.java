@@ -9,6 +9,8 @@ import com.song.biz.dto.vo.ListVoucherVo;
 import com.song.biz.service.VoucherService;
 import com.song.common.dto.ApiResponse;
 import com.song.mybatis.help.PageInfo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/voucher")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "凭证")
 public class VoucherController {
     final VoucherService voucherService;
 
@@ -33,6 +36,7 @@ public class VoucherController {
      * @param form
      * @return
      */
+    @Operation(summary = "创建或修改凭证")
     @PostMapping(value = "/save")
     public ApiResponse<Boolean> save(@Validated @RequestBody CreateVoucherForm form) {
         return ApiResponse.success(voucherService.save(form));
@@ -44,6 +48,7 @@ public class VoucherController {
      * @param form
      * @return
      */
+    @Operation(summary = "分页查询凭证")
     @PostMapping(value = "/list")
     public ApiResponse<PageInfo<ListVoucherVo>> list(@Validated @RequestBody ListVoucherForm form) {
         return ApiResponse.success(voucherService.list(form));
@@ -55,6 +60,7 @@ public class VoucherController {
      * @param id
      * @return
      */
+    @Operation(summary = "获取凭证明细")
     @GetMapping(value = "/get")
     public ApiResponse<GetVoucherVo> get(@RequestParam
                                          @NotNull
@@ -69,6 +75,7 @@ public class VoucherController {
      * @param form
      * @return
      */
+    @Operation(summary = "删除凭证")
     @PostMapping(value = "/del")
     public ApiResponse<Boolean> del(@Valid @RequestBody DelVoucherForm form) {
         return ApiResponse.success(voucherService.del(form));

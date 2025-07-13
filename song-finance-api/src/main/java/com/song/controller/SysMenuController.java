@@ -9,6 +9,8 @@ import com.song.biz.dto.vo.ListTreeMenuVo;
 import com.song.biz.dto.vo.ListTreeSelectMenuVo;
 import com.song.biz.service.SysMenuService;
 import com.song.common.dto.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Validated
+@Tag(name = "系统菜单管理")
 public class SysMenuController {
     final SysMenuService sysMenuService;
 
@@ -34,6 +37,7 @@ public class SysMenuController {
      * @param title
      * @return
      */
+    @Operation(summary = "树形菜单列表")
     @GetMapping(value = "/listTreeMenu")
     public ApiResponse<List<ListTreeMenuVo>> listTreeMenu(@RequestParam(required = false) String title) {
         return ApiResponse.success(sysMenuService.listTreeMenu(title));
@@ -44,6 +48,7 @@ public class SysMenuController {
      *
      * @return
      */
+    @Operation(summary = "树形选择菜单列表")
     @GetMapping(value = "/listTreeSelectMenu")
     public ApiResponse<List<ListTreeSelectMenuVo>> listTreeSelectMenu() {
         return ApiResponse.success(sysMenuService.listTreeSelectMenu());
@@ -55,6 +60,7 @@ public class SysMenuController {
      * @param id
      * @return
      */
+    @Operation(summary = "获取菜单明细")
     @GetMapping(value = "/getMenuById")
     public ApiResponse<GetMenuByIdVo> getMenuById(@Validated @RequestParam @NotNull Integer id) {
         return ApiResponse.success(sysMenuService.getMenuById(id));
@@ -66,6 +72,7 @@ public class SysMenuController {
      * @param form
      * @return
      */
+    @Operation(summary = "创建菜单")
     @PostMapping(value = "/create")
     public ApiResponse<Boolean> create(@Validated @RequestBody CreateMenuForm form) {
         return ApiResponse.success(sysMenuService.create(form));
@@ -77,6 +84,7 @@ public class SysMenuController {
      * @param form
      * @return
      */
+    @Operation(summary = "修改菜单")
     @PostMapping(value = "/update")
     public ApiResponse<Boolean> update(@Validated @RequestBody UpdateMenuForm form) {
         return ApiResponse.success(sysMenuService.update(form));
@@ -88,6 +96,7 @@ public class SysMenuController {
      * @param form
      * @return
      */
+    @Operation(summary = "删除菜单")
     @PostMapping(value = "/del")
     public ApiResponse<Boolean> del(@Validated @RequestBody DelMenuForm form) {
         return ApiResponse.success(sysMenuService.del(form));
