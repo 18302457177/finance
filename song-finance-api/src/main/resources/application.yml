@@ -125,12 +125,12 @@ redisson:
   address: redis://39.96.178.50:6379
 security:
   # 开启安全校验
-  enable: false
+  enable: true
   getUserType: token
   # 白名单
   ignores:
     # swagger
-    - /v3/api-docs
+    - /v3/api-docs/*
     - /swagger-resources/configuration/ui
     - /swagger-resources
     - /swagger-resources/configuration/security

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,22 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "用户登录模块")
 public class LoginController {
     final MemberLoginService memberLoginService;
+    final PasswordEncoder passwordEncoder;
+    @Operation(summary = "密码加密")
+    @GetMapping(value = "/password/{password}")
+    public String getClientId(@PathVariable("password")String password) {
+
+        return passwordEncoder.encode(password);
+    }
+
+    @Operation(summary = "密码校验")
+    @GetMapping(value = "/match/{password}")
+    public boolean match(@PathVariable("password")String password) {
+        //$10$HD.4cEFCzEwL9/4R1dtVyevlbEjK5CT5tumKiYcdp94QfqZzbEe.a
+        //$10$HD.4cEFCzEwL9/4R1dtVyevlbEjK5CT5tumKiYcdp94QfqZzbEe.a
+        return passwordEncoder.matches(password,"$2a$10$HD.4cEFCzEwL9/4R1dtVyevlbEjK5CT5tumKiYcdp94QfqZzbEe.a");
+    }
+
 
     /**
      * 获取客户端Id
